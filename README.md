@@ -1,4 +1,9 @@
-
+## TODO
+* Use Window.localStorage to save the cart contents when user is not logged in
+* Implement "results per page" for pagination
+* Implement Search Bar
+* Implement client-side password hashing. Password should never be stored in plain text
+* Implement oauth token stored in cookie along with CSRF token to protect against CSRF attack
 
 ## Available Scripts
 
