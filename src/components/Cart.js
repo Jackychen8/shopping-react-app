@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import { Panel, Button } from 'react-bootstrap';
 
 import Item from './Items';
+import changePage from '../actions/Active';
 
-
-const Cart = ({cartState}) => (
-		<Panel>
-			<Panel.Heading>
-				<Panel.Title componentClass="h2">Your Shopping Cart</Panel.Title>
-			</Panel.Heading>
-			<Panel.Body>
-				{ Object.values(cartState.cart).map(i => <Item key={i.id} item={i}/>) }
-				{ Object.keys(cartState.cart).length ? <Button bsStyle="primary">Check Out</Button> : ""}
-			</Panel.Body>
-		</Panel>
+const Cart = ({cartState, changePage, checkOut}) => (
+  <Panel>
+    <Panel.Heading>
+      <Panel.Title componentClass="h2">Your Shopping Cart</Panel.Title>
+    </Panel.Heading>
+    <Panel.Body>
+      { Object.values(cartState.cart).map(i => <Item key={i.id} item={i}/>) }
+      { !checkOut && Object.keys(cartState.cart).length ? <Button bsStyle="primary" onClick={changePage}>Check Out</Button> : ""}
+    </Panel.Body>
+  </Panel>
 );
 
 const mapStateToProps = state => ({
@@ -22,8 +22,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	checkout: () => dispatch(),
-	delItem: () => dispatch(),
+  changePage: () => dispatch(changePage('checkout')),
+  delItem: () => dispatch(),
 })
 
 

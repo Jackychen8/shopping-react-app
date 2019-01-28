@@ -4,6 +4,12 @@
 * Implement Search Bar
 * Implement client-side password hashing. Password should never be stored in plain text
 * Implement oauth token stored in cookie along with CSRF token to protect against CSRF attack
+* Stop needless re-initialization of strings by creating constant variables for them (i.e. action types)
+* Adopt "use strict";
+* Implement unit tests
+* Input Validation
+* propType validation and defaultProps
+
 
 ## Available Scripts
 

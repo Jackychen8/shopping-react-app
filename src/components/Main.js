@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Cart from './Cart';
 import WebStore from './WebStore';
 import AuthForm from './Auth';
+import CheckOutForm from './CheckOut';
 
 class Main extends Component {
   renderBody() {
@@ -16,6 +17,8 @@ class Main extends Component {
         return <Cart/>;
       case "auth":
         return <AuthForm/>;
+      case "checkout":
+        return <CheckOutForm/>;
       default:
         return <WebStore/>;
     }
