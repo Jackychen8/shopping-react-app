@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Navbar, Nav, NavItem, FormGroup, FormControl, Button } from 'react-bootstrap';
 
+import changePage from '../actions/Active';
+import { logging_out } from '../actions/Auth';
 
-export default class Header extends Component {
+class Header extends Component {
   render() {
+    const { changePage, cartState, authState } = this.props;
+    const { loggedIn } = authState;
+    const { cart } = cartState;
+    const cartSize = Object.keys(cart).length;
     return (
-          <Navbar collapseOnSelect>
+      <Navbar collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#brand">Yamazon</a>
+            <a href="#" onClick={() => {changePage('store')}}>Yamazon</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -19,19 +26,30 @@ export default class Header extends Component {
             </FormGroup>{' '}
             <Button type="submit">Submit</Button>
           </Navbar.Form>
+
           <Nav pullRight>
-            <NavItem eventKey={1} onSelect={() => {console.log('login')}}>
-              Login
+            <NavItem eventKey={1} onSelect={() => {changePage('auth')}}>
+              { loggedIn ? "Logout" : "Login" }
             </NavItem>
-                  <NavItem eventKey={2} onSelect={() => {console.log('logout')}}>
-              Logout
+            <NavItem eventKey={2} onSelect={() => {changePage('cart')}}>
+              Cart { cartSize ? `(${cartSize})` : ''}
             </NavItem>
-            <NavItem eventKey={3} onSelect={() => {console.log('cart')}}>
-              Cart
-            </NavItem>
+            { loggedIn ? <NavItem eventKey={3} onSelect={() => {changePage('history')}}>History</NavItem> : "" }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  cartState: state.cartReducer,
+  authState: state.authReducer,
+});
+
+const mapDispatchToProps = dispatch => ({
+  changePage: (page) => dispatch(changePage(page)),
+  logout: () => dispatch(logging_out()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

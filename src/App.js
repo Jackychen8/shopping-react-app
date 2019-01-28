@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+
 import './App.css';
 import Main from './components/Main.js';
 import Header from './components/Header.js';
 
+// TODO: Add react-navigation for url routing and navigation history
 class App extends Component {
   render() {
     return (
@@ -16,4 +18,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default (App);
