@@ -30,7 +30,7 @@ class CheckOutForm extends Component {
   }
 
   render(){
-    const { loggedIn, checkout, user } = this.props;
+    const { loggedIn, user } = this.props;
     const { name, address, cc } = this.state;
     return(
       <div>

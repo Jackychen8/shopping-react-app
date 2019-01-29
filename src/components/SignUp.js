@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Row, Panel, Form, FormGroup, FormControl, ControlLabel, Checkbox, Button, Col } from 'react-bootstrap';
+import { Row, Panel, Form, FormGroup, FormControl, ControlLabel, Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { signUp, logging_out } from '../actions/Auth';
+import { signUp } from '../actions/Auth';
 
 
 class SignupForm extends Component {
@@ -19,21 +19,10 @@ class SignupForm extends Component {
   }
 
   handleChange(e){
-    switch (e.target.id){
-      case "email":
-        this.setState({email: e.target.value});
-        break;
-      case "password":
-        this.setState({password: e.target.value});
-        break;
-      case "firstName":
-        this.setState({firstName: e.target.value});
-        break
-      case "lastName":
-        this.setState({lastName: e.target.value});
-      default:
-        break;
-    }
+    const { id, value } = e.target;
+    const change = {};
+    change[id] = value;
+    this.setState(change);
   }
 
   handleSubmit(e){
@@ -42,8 +31,7 @@ class SignupForm extends Component {
   }
 
   render() {
-    const { signUp } = this.props;
-    const { email, password, remember, firstName, lastName } = this.state;
+    const { email, password, firstName, lastName } = this.state;
     return (
       <Row>
         <Col xs={8} xsOffset={2}>
