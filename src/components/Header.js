@@ -4,10 +4,11 @@ import { Navbar, Nav, NavItem, FormGroup, FormControl, Button } from 'react-boot
 
 import changePage from '../actions/Active';
 import { logging_out } from '../actions/Auth';
+import { fetchHistory } from '../actions/User';
 
 class Header extends Component {
   render() {
-    const { changePage, cartState, authState } = this.props;
+    const { changePage, cartState, authState, logout, fetchHistory } = this.props;
     const { loggedIn } = authState;
     const { cart } = cartState;
     const cartSize = Object.keys(cart).length;
@@ -20,21 +21,23 @@ class Header extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Navbar.Form pullLeft>
+          {/*TODO: <Navbar.Form pullLeft>
             <FormGroup>
               <FormControl type="text" placeholder="Search" />
             </FormGroup>{' '}
             <Button type="submit">Submit</Button>
-          </Navbar.Form>
+          </Navbar.Form>*/}
 
           <Nav pullRight>
-            <NavItem eventKey={1} onSelect={() => {changePage('auth')}}>
-              { loggedIn ? "Logout" : "Login" }
-            </NavItem>
-            <NavItem eventKey={2} onSelect={() => {changePage('cart')}}>
+            { loggedIn ? <NavItem eventKey={2} onSelect={logout}>Logout</NavItem>
+              : <NavItem eventKey={1} onSelect={() => {changePage('auth')}}>Login</NavItem>
+            }
+
+            { loggedIn ? <NavItem eventKey={3} onSelect={() => {fetchHistory();changePage('history')}}>History</NavItem>
+              : <NavItem eventKey={4} onSelect={() => {changePage('signUp')}}>Sign Up</NavItem>}
+            <NavItem eventKey={5} onSelect={() => {changePage('cart')}}>
               Cart { cartSize ? `(${cartSize})` : ''}
             </NavItem>
-            { loggedIn ? <NavItem eventKey={3} onSelect={() => {changePage('history')}}>History</NavItem> : "" }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -50,6 +53,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   changePage: (page) => dispatch(changePage(page)),
   logout: () => dispatch(logging_out()),
+  fetchHistory: () => dispatch(fetchHistory())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

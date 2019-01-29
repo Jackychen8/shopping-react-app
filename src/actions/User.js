@@ -1,15 +1,20 @@
-const fetchHistory = () => dispatch => {
+import { baseURL } from "../common";
+
+export const fetchHistory = () => (dispatch, getState) => {
   dispatch({
     type: "FETCH_HISTORY",
   })
-  fetch(`localhost:xxxx/user/${}/history`)
-    .then(res => fetchedHistory(res))
+  const { user } = getState().authReducer;
+  fetch(`${baseURL}/users/${user.id}/history`)
+    .then(res => {
+      res.json().then(body => dispatch(fetchedHistory(body.history)))
+    })
     .catch(e => console.log(e));
 }
 
-const fetchedHistory = (res) => dispatch => {
+const fetchedHistory = (history) => dispatch => {
   dispatch({
     type: "FETCHED_HISTORY",
-    history: res,
+    history,
   })
 }

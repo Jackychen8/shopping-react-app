@@ -16,7 +16,7 @@ const Item = ({item, delItem, addItem, activePage}) => {
       Buttons = (<Button bsStyle="primary" onClick={() => addItem(item)}>Add</Button>);
       break;
     default:
-      Buttons = (null);
+      Buttons = null;
   }
   return (
     <Row style={{borderBottom: "1px solid black", marginBottom: "2em", paddingBottom: "1em", textAlign: "left"}}>

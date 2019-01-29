@@ -16,6 +16,8 @@ state = {
 const cartReducer = (state = { cart: {} }, action) => {
   switch (action.type) {
     case 'ADD_ITEM':
+      return state;
+    case 'ADDED_ITEM':
       const newItems = Object.assign(state.cart);
       const item = newItems[action.item.id];
       if (item) {
@@ -26,9 +28,17 @@ const cartReducer = (state = { cart: {} }, action) => {
       }
       return { ...state, cart: newItems };
     case 'DEL_ITEM':
+      return state;
+    case 'DELETED_ITEM':
       const Items = Object.assign(state.cart);
       delete Items[action.item.id];
       return { ...state, cart: Items};
+    case 'CHECK_OUT':
+      return { ...state, loading: true };
+    case 'CHECKED_OUT':
+      return { ...state, loading: false, cart: {} };
+    case 'EMPTY_CART':
+      return { ...state, cart: {} };
     default:
       return state;
   }

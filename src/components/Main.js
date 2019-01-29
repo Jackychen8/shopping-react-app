@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { Grid } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { getMerchandise } from '../actions/WebStore';
 import Cart from './Cart';
 import WebStore from './WebStore';
 import AuthForm from './Auth';
 import CheckOutForm from './CheckOut';
+import SignUpForm from './SignUp';
+import History from './History';
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+    props.getMerchandise();
+  }
+
   renderBody() {
     const { activePage } = this.props;
     switch (activePage) {
@@ -19,6 +27,10 @@ class Main extends Component {
         return <AuthForm/>;
       case "checkout":
         return <CheckOutForm/>;
+      case "signUp":
+        return <SignUpForm/>;
+      case "history":
+        return <History/>;
       default:
         return <WebStore/>;
     }
@@ -41,6 +53,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  getMerchandise: () => dispatch(getMerchandise()),
   checkout: () => dispatch(),
 })
 

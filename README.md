@@ -7,8 +7,10 @@
 * Stop needless re-initialization of strings by creating constant variables for them (i.e. action types)
 * Adopt "use strict";
 * Implement unit tests
-* Input Validation
+* Form Input Validation
 * propType validation and defaultProps
+* Configure webpack
+* move in-line styles to .scss files
 
 
 ## Available Scripts

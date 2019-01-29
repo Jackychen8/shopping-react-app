@@ -5,17 +5,19 @@ import { Panel, Button } from 'react-bootstrap';
 import Item from './Items';
 import changePage from '../actions/Active';
 
-const Cart = ({cartState, changePage, checkOut}) => (
+const Cart = ({cartState, changePage, checkOut}) => {
+  console.log(cartState);
+  return(
   <Panel>
     <Panel.Heading>
       <Panel.Title componentClass="h2">Your Shopping Cart</Panel.Title>
     </Panel.Heading>
     <Panel.Body>
       { Object.values(cartState.cart).map(i => <Item key={i.id} item={i}/>) }
-      { !checkOut && Object.keys(cartState.cart).length ? <Button bsStyle="primary" onClick={changePage}>Check Out</Button> : ""}
+      { !checkOut && Object.keys(cartState.cart).length ? <Button bsStyle="primary" onClick={changePage}>To Check Out</Button> : ""}
     </Panel.Body>
   </Panel>
-);
+)};
 
 const mapStateToProps = state => ({
   cartState: state.cartReducer,
