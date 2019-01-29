@@ -63,13 +63,13 @@ export const logging_out = () => dispatch => {
 	// 	.then(res => logout())
 	// 	.catch(e => console.log(e));
   dispatch(emptyCart());
+  dispatch(changePage("store"))
 };
 
 export const signUp = (body) => dispatch => {
   dispatch({
     type: 'SIGN_UP',
   })
-  console.log(body);
   fetch(`${baseURL}/users`, {
       method: "POST",
       headers: {
@@ -85,7 +85,7 @@ export const signUp = (body) => dispatch => {
       };
       return res.json().then((json) => {
         if (json !== undefined) {
-          dispatch(signedUp(body));
+          dispatch(signedUp(json));
           dispatch(changePage("store"));
         }
       });
