@@ -7,7 +7,7 @@ const PageButtons = ({ n, show }) => (
       &larr; Previous Page
     </Pager.Item>*/}
     Found {n} Items
-    {n > show && (<Pager.Item next href="#">Next Page &rarr;</Pager.Item>)}
+    {/*n > show && (<Pager.Item next href="#">Next Page &rarr;</Pager.Item>)*/}
   </Pager>
 );
 

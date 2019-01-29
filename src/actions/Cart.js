@@ -83,7 +83,7 @@ export const deletedItem = (item) => dispatch => {
   })
 };
 
-export const checkOut = () => (dispatch, getState) => {
+export const checkOut = (info) => (dispatch, getState) => {
   dispatch({
     type: 'CHECK_OUT',
   })
@@ -96,9 +96,7 @@ export const checkOut = () => (dispatch, getState) => {
         "content-type": "application/json",
         "cache-control": "no-cache"
       },
-      body: JSON.stringify({
-        info: { name: "", address: "", cc: "" }
-      })
+      body: JSON.stringify({ info })
     })
       .then(res => {
         dispatch(checkedOut());

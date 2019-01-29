@@ -6,7 +6,6 @@ import Item from './Items';
 import changePage from '../actions/Active';
 
 const Cart = ({cartState, changePage, checkOut}) => {
-  console.log(cartState);
   return(
   <Panel>
     <Panel.Heading>

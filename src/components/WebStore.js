@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PageButtons from './Pager';
 import Item from './Items';
 
-const PaginationCount = 10;// TODO: connect via redux and provide as dropdown option
+const PaginationCount = 50;// TODO: connect via redux and provide as dropdown option
 
 const WebStore = ({merchandise}) => (
   <div>
