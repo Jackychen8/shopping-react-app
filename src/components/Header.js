@@ -9,7 +9,7 @@ import { fetchHistory } from '../actions/User';
 class Header extends Component {
   render() {
     const { changePage, cartState, authState, logout, fetchHistory } = this.props;
-    const { loggedIn } = authState;
+    const { loggedIn, user } = authState;
     const { cart } = cartState;
     const cartSize = Object.keys(cart).length;
     return (
@@ -20,7 +20,7 @@ class Header extends Component {
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
-        <Navbar.Collapse>
+          { user.firstName && <Nav pullLeft><NavItem>{`Welcome ${user.firstName} ${user.lastName}`}</NavItem></Nav>}
           {/*TODO: <Navbar.Form pullLeft>
             <FormGroup>
               <FormControl type="text" placeholder="Search" />
@@ -28,6 +28,7 @@ class Header extends Component {
             <Button type="submit">Submit</Button>
           </Navbar.Form>*/}
 
+        <Navbar.Collapse>
           <Nav pullRight>
             { loggedIn ? <NavItem eventKey={2} onSelect={logout}>Logout</NavItem>
               : <NavItem eventKey={1} onSelect={() => {changePage('auth')}}>Login</NavItem>
